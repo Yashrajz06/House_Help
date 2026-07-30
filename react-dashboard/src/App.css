@@ -1,0 +1,115 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.dashboard-header {
+  background-color: #232f3e;
+  color: white;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-bottom: 4px solid #f59e0b; /* thin orange line */
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dashboard-header p {
+  margin: 0.5rem 0 0 0;
+  color: #9ca3af;
+  font-size: 1rem;
+}
+
+.exit-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.exit-button:hover {
+  background-color: #dc2626;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  padding: 3rem;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.column-header {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card {
+  background: white;
+  padding: 1.75rem 1.25rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left: 5px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  border-left-color: #4b5563;
+}
+
+.card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.35rem;
+  color: #1f2937;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #4b5563;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

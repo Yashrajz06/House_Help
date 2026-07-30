@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Users Master</title>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+
+<body>
+
+    <div class="page-border">
+
+        <div class="title-main">House Help Management System</div>
+
+        <div class="title-sub">Users Master Entry</div>
+
+        <p id="msg"></p>
+
+        <div class="form-container">
+
+            <div class="form-row">
+                <label>User ID <span>*</span></label>
+                <div class="id-section">
+                    <input type="text" id="userId" readonly maxlength="10"
+                        style="width: 150px; background-color:#eee; cursor:not-allowed;">
+                    <div class="mode-toggle">
+                        <button type="button" id="findModeBtn" class="toggle-btn" onclick="navigateWithCheck(function(){ set_mode('Find'); })">Find</button>
+                        <button type="button" id="newModeBtn" class="toggle-btn active" onclick="navigateWithCheck(function(){ set_mode('New'); })">New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Full Name <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="text" id="fullName" maxlength="50" style="width: 280px;">
+                    <div id="fullNameMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>User Type <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <div class="custom-dropdown" id="dropdownContainer_userType">
+                    <input type="text" id="userType_display" readonly placeholder="" onclick="toggleDropdown('userType')">
+                    <input type="hidden" id="userType">
+                    <div id="tableContainer_userType" class="dropdown-table-container">
+                        <table class="dropdown-table" id="table_userType">
+                            <thead>
+                                <tr>
+                                <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    <div id="userTypeMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Mobile No <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="text" id="mobileNo" maxlength="10" style="width: 180px;">
+                    <div id="mobileNoMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Email <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="email" id="email" maxlength="50" style="width: 280px;">
+                    <div id="emailMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Password <span>*</span></label>
+                <div style="position: relative; width: 280px;">
+                    <input type="password" id="passwordHash" style="padding-right: 40px; width: 100%;" maxlength="50">
+                    <span id="eyeIcon" onclick="togglePassword()"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #555; display: flex; align-items: center;"
+                        title="Show Password">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l-.708.709z" />
+                            <path
+                                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                            <path
+                                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                        </svg>
+                    </span>
+                    <div id="passwordHashMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Status <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <div class="custom-dropdown" id="dropdownContainer_isActive">
+                    <input type="text" id="isActive_display" readonly placeholder="" onclick="toggleDropdown('isActive')">
+                    <input type="hidden" id="isActive">
+                    <div id="tableContainer_isActive" class="dropdown-table-container">
+                        <table class="dropdown-table" id="table_isActive">
+                            <thead>
+                                <tr>
+                                <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    <div id="isActiveMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button type="button" id="saveBtn" class="save-btn" onclick="save_data()">Save</button>
+                <button type="button" id="prevBtn" class="prev-btn" onclick="previous_data()">Previous</button>
+                <button type="button" id="nextBtn" class="next-btn" onclick="next_data()">Next</button>
+                <button type="button" id="exitBtn" class="exit-btn" onclick="exit_page()">Exit</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="confirmOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 30px; border-radius: 12px; width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <p id="confirmMessage" style="font-size: 18px; font-weight: 600; color: #23164f; margin-bottom: 25px;"></p>
+            <div id="confirmButtons" style="display: flex; justify-content: center; gap: 15px;">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/users_form.js"></script>
+
+</body>
+
+</html>

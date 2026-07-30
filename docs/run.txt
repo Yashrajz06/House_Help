@@ -1,0 +1,11 @@
+Node.js Server (Users & LOV):
+node server.js
+
+Python Server (Notifications & Audit Log):
+source venv/bin/activate
+uvicorn main:app --reload --port 8000
+
+http://localhost:3000/users_form.html
+http://localhost:3000/lov_form.html
+http://localhost:8000/audit_log_form.html
+http://localhost:8000/notifications_form.html

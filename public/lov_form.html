@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>LOV Master</title>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+
+<body>
+
+    <div class="page-border">
+
+        <div class="title-main">House Help Management System</div>
+
+        <div class="title-sub">LOV Master</div>
+
+        <p id="msg"></p>
+
+        <div class="form-container" style="grid-template-columns: 1fr; width: fit-content; min-width: 500px; margin: auto;">
+
+            <div class="form-row">
+                <label>LOV ID <span>*</span></label>
+                <div class="id-section">
+                    <input type="text" id="lovId" readonly maxlength="10"
+                        style="width: 150px; background-color:#eee; cursor:not-allowed;">
+                    <div class="mode-toggle">
+                        <button type="button" id="findModeBtn" class="toggle-btn" onclick="navigateWithCheck(function(){ set_mode('Find'); })">Find</button>
+                        <button type="button" id="newModeBtn" class="toggle-btn active" onclick="navigateWithCheck(function(){ set_mode('New'); })">New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Field Name <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="text" id="fieldName" maxlength="100" style="width: 280px;">
+                    <div id="fieldNameMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Option Value <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="text" id="optionValue" maxlength="100" style="width: 280px;">
+                    <div id="optionValueMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+
+
+            <div class="button-row">
+                <button type="button" id="saveBtn" class="save-btn" onclick="save_data()">Save</button>
+                <button type="button" id="prevBtn" class="prev-btn" onclick="previous_data()">Previous</button>
+                <button type="button" id="nextBtn" class="next-btn" onclick="next_data()">Next</button>
+                <button type="button" id="exitBtn" class="exit-btn" onclick="exit_page()">Exit</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="confirmOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 30px; border-radius: 12px; width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <p id="confirmMessage" style="font-size: 18px; font-weight: 600; color: #23164f; margin-bottom: 25px;"></p>
+            <div id="confirmButtons" style="display: flex; justify-content: center; gap: 15px;">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/lov_form.js"></script>
+
+</body>
+
+</html>

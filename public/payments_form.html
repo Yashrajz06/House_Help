@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Payments Transaction Entry</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .form-row, .form-row-full {
+            grid-template-columns: 220px 1fr;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-border">
+
+        <div class="title-main">House Help Management System</div>
+
+        <div class="title-sub">Payments Transaction Entry</div>
+
+        <p id="msg"></p>
+
+        <div class="form-container">
+
+            <div class="form-row">
+                <label>Payment ID <span>*</span></label>
+                <div class="id-section">
+                    <input type="text" id="paymentId" readonly maxlength="10"
+                        style="width: 150px; background-color:#eee; cursor:not-allowed;">
+                    <div class="mode-toggle">
+                        <button type="button" id="findModeBtn" class="toggle-btn"
+                            onclick="navigateWithCheck(function(){ set_mode('Find'); })">Find</button>
+                        <button type="button" id="newModeBtn" class="toggle-btn active"
+                            onclick="navigateWithCheck(function(){ set_mode('New'); })">New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Booking ID</label>
+                <div style="position: relative; width: 100%;">
+                    <div class="custom-dropdown" id="dropdownContainer_bookingId">
+                        <input type="text" id="bookingId_display" readonly placeholder="" onclick="toggleDropdown('bookingId')">
+                        <input type="hidden" id="bookingId">
+                        <div id="tableContainer_bookingId" class="dropdown-table-container">
+                            <table class="dropdown-table" id="table_bookingId">
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer ID</th>
+                                        <th>Provider ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="bookingIdMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Amount <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="number" id="amount" min="0" step="0.01" maxlength="15">
+                    <div id="amountMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Payment Mode <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <div class="custom-dropdown" id="dropdownContainer_paymentMode">
+                        <input type="text" id="paymentMode_display" readonly placeholder="" onclick="toggleDropdown('paymentMode')">
+                        <input type="hidden" id="paymentMode">
+                        <div id="tableContainer_paymentMode" class="dropdown-table-container">
+                            <table class="dropdown-table" id="table_paymentMode">
+                                <thead>
+                                    <tr>
+                                        <th>Mode</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="paymentModeMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Payment Status <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <div class="custom-dropdown" id="dropdownContainer_paymentStatus">
+                        <input type="text" id="paymentStatus_display" readonly placeholder="" onclick="toggleDropdown('paymentStatus')">
+                        <input type="hidden" id="paymentStatus">
+                        <div id="tableContainer_paymentStatus" class="dropdown-table-container">
+                            <table class="dropdown-table" id="table_paymentStatus">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="paymentStatusMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Payment Date</label>
+                <div style="position: relative; width: 100%;">
+                    <input type="date" id="paymentDate">
+                    <div id="paymentDateMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button type="button" id="saveBtn" class="save-btn" onclick="save_data()">Save</button>
+                <button type="button" id="prevBtn" class="prev-btn" onclick="previous_data()">Previous</button>
+                <button type="button" id="nextBtn" class="next-btn" onclick="next_data()">Next</button>
+                <button type="button" id="exitBtn" class="exit-btn" onclick="exit_page()">Exit</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="confirmOverlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;">
+        <div
+            style="background: white; padding: 30px; border-radius: 12px; width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <p id="confirmMessage" style="font-size: 18px; font-weight: 600; color: #23164f; margin-bottom: 25px;"></p>
+            <div id="confirmButtons" style="display: flex; justify-content: center; gap: 15px;">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/payments_form.js"></script>
+
+</body>
+
+</html>

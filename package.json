@@ -1,0 +1,14 @@
+{
+  "name": "house-help",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"node server.js\" \"venv/bin/uvicorn main:app --reload --port 8000\" \"cd react-dashboard && npm run dev\""
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "oracledb": "^7.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

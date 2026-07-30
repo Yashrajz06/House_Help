@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Audit Log Master</title>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .form-row, .form-row-full {
+            grid-template-columns: 220px 1fr;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-border">
+
+        <div class="title-main">House Help Management System</div>
+
+        <div class="title-sub">Audit Log Transaction Entry</div>
+
+        <p id="msg"></p>
+
+        <div class="form-container">
+
+
+            <div class="form-row">
+                <label>Audit ID <span>*</span></label>
+                <div class="id-section">
+                    <input type="text" id="auditId" readonly maxlength="10"
+                        style="width: 150px; background-color:#eee; cursor:not-allowed;">
+                    <div class="mode-toggle">
+                        <button type="button" id="findModeBtn" class="toggle-btn"
+                            onclick="navigateWithCheck(function(){ set_mode('Find'); })">Find</button>
+                        <button type="button" id="newModeBtn" class="toggle-btn active"
+                            onclick="navigateWithCheck(function(){ set_mode('New'); })">New</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>User ID</label>
+                <div style="position: relative; width: 100%;">
+                    <div class="custom-dropdown" id="dropdownContainer_userId">
+                    <input type="text" id="userId_display" readonly placeholder="" onclick="toggleDropdown('userId')">
+                    <input type="hidden" id="userId">
+                    <div id="tableContainer_userId" class="dropdown-table-container">
+                        <table class="dropdown-table" id="table_userId">
+                            <thead>
+                                <tr>
+                                <th>User ID</th>
+                                <th>User Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    <div id="userIdMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <label>Action <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="text" id="action" maxlength="50" style="width: 280px;">
+                    <div id="actionMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>Action Date <span>*</span></label>
+                <div style="position: relative; width: 100%;">
+                    <input type="date" id="actionDate" style="width: 200px;">
+                    <div id="actionDateMsg" class="smallMsg"></div>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button type="button" id="saveBtn" class="save-btn" onclick="save_data()">Save</button>
+                <button type="button" id="prevBtn" class="prev-btn" onclick="previous_data()">Previous</button>
+                <button type="button" id="nextBtn" class="next-btn" onclick="next_data()">Next</button>
+                <button type="button" id="exitBtn" class="exit-btn" onclick="exit_page()">Exit</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="confirmOverlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;">
+        <div
+            style="background: white; padding: 30px; border-radius: 12px; width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <p id="confirmMessage" style="font-size: 18px; font-weight: 600; color: #23164f; margin-bottom: 25px;"></p>
+            <div id="confirmButtons" style="display: flex; justify-content: center; gap: 15px;">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/audit_log_form.js"></script>
+
+</body>
+
+</html>
