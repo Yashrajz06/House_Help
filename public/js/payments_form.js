@@ -329,7 +329,7 @@ function get_lov_data() {
         });
 }
 function exit_page() {
-    navigateWithCheck(function () { window.history.back(); });
+    navigateWithCheck(function () { window.location.href = "http://localhost:3000/"; });
 }
 function checkDirtyState() {
     var bookingId = document.getElementById("bookingId").value.trim();

@@ -257,7 +257,7 @@ function get_lov_data() {
 }
 function exit_page() {
     navigateWithCheck(function() {
-        window.location.href = "/";
+        window.location.href = "http://localhost:3000/";
     });
 }
 function save_data(successCallback) {

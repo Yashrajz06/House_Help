@@ -281,7 +281,7 @@ function get_lov_data() {
         .catch(function(err) { console.error("Error loading users", err); });
 }
 function exit_page() {
-    navigateWithCheck(function () { window.history.back(); });
+    navigateWithCheck(function () { window.location.href = "http://localhost:3000/"; });
 }
 function checkDirtyState() {
     var userId = document.getElementById("userId").value.trim();

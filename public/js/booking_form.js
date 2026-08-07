@@ -351,7 +351,7 @@ function get_dropdowns_data() {
         .catch(function(err) { console.error("Error loading dropdown data", err); });
 }
 function exit_page() {
-    navigateWithCheck(function () { window.history.back(); });
+    navigateWithCheck(function () { window.location.href = "http://localhost:3000/"; });
 }
 function checkDirtyState() {
     var categoryId = document.getElementById("categoryId").value.trim();
