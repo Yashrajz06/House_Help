@@ -3,19 +3,14 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const oracledb = require('oracledb');
-
 oracledb.outFormat = oracledb.OUT_FORMAT_ARRAY;
 oracledb.autoCommit = true;
-
-// Database Config — loaded from .env
 const dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     connectString: process.env.DB_DSN
 };
-
 const PORT = 3000;
-
 const server = http.createServer(async (req, res) => {
     let connection;
     try {
@@ -24,7 +19,9 @@ const server = http.createServer(async (req, res) => {
             if (filePath === './public/') {
                 filePath = './public/users_form.html';
             }
-
+            if (req.url === '/booking') {
+                filePath = './public/booking_form.html';
+            }
             const extname = String(path.extname(filePath)).toLowerCase();
             const mimeTypes = {
                 '.html': 'text/html',
@@ -32,9 +29,7 @@ const server = http.createServer(async (req, res) => {
                 '.css': 'text/css',
                 '.json': 'application/json'
             };
-
             const contentType = mimeTypes[extname] || 'application/octet-stream';
-
             if (extname === '.html' || extname === '.js' || extname === '.css') {
                 fs.readFile(filePath, (error, content) => {
                     if (error) {
@@ -47,10 +42,8 @@ const server = http.createServer(async (req, res) => {
                 });
                 return;
             }
-
             try {
                 connection = await oracledb.getConnection(dbConfig);
-
                 if (req.url === '/getUsers') {
                     const result = await connection.execute(`SELECT USER_ID, USER_TYPE, FULL_NAME, MOBILE_NO, EMAIL, PASSWORD_HASH, IS_ACTIVE FROM USERS ORDER BY USER_ID`);
                     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -89,12 +82,10 @@ const server = http.createServer(async (req, res) => {
             req.on('data', chunk => {
                 body += chunk.toString();
             });
-
             req.on('end', async () => {
                 try {
                     const data = JSON.parse(body);
                     connection = await oracledb.getConnection(dbConfig);
-
                     if (req.url === '/saveUser') {
                         if (data.id) {
                             await connection.execute(
@@ -195,7 +186,6 @@ const server = http.createServer(async (req, res) => {
         }
     }
 });
-
 server.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}/`);
 });

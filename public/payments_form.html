@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Payments Transaction Entry</title>
     <link rel="stylesheet" href="css/common.css">
@@ -10,19 +9,12 @@
         }
     </style>
 </head>
-
 <body>
-
     <div class="page-border">
-
         <div class="title-main">House Help Management System</div>
-
         <div class="title-sub">Payments Transaction Entry</div>
-
         <p id="msg"></p>
-
         <div class="form-container">
-
             <div class="form-row">
                 <label>Payment ID <span>*</span></label>
                 <div class="id-section">
@@ -36,7 +28,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="form-row">
                 <label>Booking ID</label>
                 <div style="position: relative; width: 100%;">
@@ -60,7 +51,6 @@
                     <div id="bookingIdMsg" class="smallMsg"></div>
                 </div>
             </div>
-
             <div class="form-row">
                 <label>Amount <span>*</span></label>
                 <div style="position: relative; width: 100%;">
@@ -68,7 +58,6 @@
                     <div id="amountMsg" class="smallMsg"></div>
                 </div>
             </div>
-
             <div class="form-row">
                 <label>Payment Mode <span>*</span></label>
                 <div style="position: relative; width: 100%;">
@@ -90,7 +79,6 @@
                     <div id="paymentModeMsg" class="smallMsg"></div>
                 </div>
             </div>
-
             <div class="form-row">
                 <label>Payment Status <span>*</span></label>
                 <div style="position: relative; width: 100%;">
@@ -112,7 +100,6 @@
                     <div id="paymentStatusMsg" class="smallMsg"></div>
                 </div>
             </div>
-
             <div class="form-row">
                 <label>Payment Date</label>
                 <div style="position: relative; width: 100%;">
@@ -120,19 +107,14 @@
                     <div id="paymentDateMsg" class="smallMsg"></div>
                 </div>
             </div>
-
             <div class="button-row">
                 <button type="button" id="saveBtn" class="save-btn" onclick="save_data()">Save</button>
                 <button type="button" id="prevBtn" class="prev-btn" onclick="previous_data()">Previous</button>
                 <button type="button" id="nextBtn" class="next-btn" onclick="next_data()">Next</button>
                 <button type="button" id="exitBtn" class="exit-btn" onclick="exit_page()">Exit</button>
             </div>
-
         </div>
-
     </div>
-
-
     <div id="confirmOverlay"
         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;">
         <div
@@ -142,10 +124,7 @@
             </div>
         </div>
     </div>
-
     <script src="js/common.js"></script>
     <script src="js/payments_form.js"></script>
-
 </body>
-
 </html>

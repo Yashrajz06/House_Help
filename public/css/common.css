@@ -334,3 +334,24 @@
         .dropdown-table tbody tr:hover td {
             background: #f2eeff;
         }
+
+        /* ── Booking form: combo-input is an alias for custom-dropdown readonly inputs ── */
+        .combo-input {
+            cursor: pointer;
+            background: white url('data:image/svg+xml;utf8,<svg fill="%235d4a9d" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>') no-repeat right 10px center;
+            padding-right: 30px;
+            width: 100%;
+        }
+
+        /* ── Fix datetime-local input height to match other inputs ── */
+        input[type="datetime-local"] {
+            height: 50px;
+            font-size: 18px;
+        }
+
+        /* ── Textarea inside .form-row: align label to top ── */
+        .form-row-full textarea,
+        .form-row textarea {
+            height: 90px;
+            font-size: 18px;
+        }

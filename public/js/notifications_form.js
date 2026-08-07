@@ -3,31 +3,23 @@ var notifications_data = [];
 var position = -1;
 var record_id = "";
 var find_clicked = false;
-
-
 window.onload = function () {
     get_notifications_data();
     get_lov_data();
-
     initMessageObserver();
-
     document.getElementById("notificationId").oninput = function () {
         if (find_clicked) {
             position = -1;
             record_id = document.getElementById("notificationId").value.trim();
-            
             if (record_id == "") {
                 clear_fields();
                 return;
             }
-            
             search_record();
         }
     };
-
     set_mode('New', true);
 };
-
 function clear_fields() {
     document.getElementById("notificationId").value = "";
     document.getElementById("title").value = "";
@@ -37,7 +29,6 @@ function clear_fields() {
     document.getElementById("isRead").value = "";
     if(document.getElementById("isRead_display")) document.getElementById("isRead_display").value = "";
 }
-
 function clear_msgs() {
     document.getElementById("titleMsg").innerHTML = "";
     document.getElementById("userIdMsg").innerHTML = "";
@@ -46,18 +37,14 @@ function clear_msgs() {
     document.getElementById("msg").innerHTML = "";
     document.getElementById("msg").className = "";
 }
-
 function set_mode(mode, force) {
     if (!force && mode === 'Find' && find_clicked) return;
     if (!force && mode === 'New' && !find_clicked) return;
-
     clear_fields();
     document.getElementById("isRead").value = mode === 'Find' ? "" : "Unread";
     clear_msgs();
-
     record_id = "";
     position = -1;
-
     if (mode === 'Find') {
         find_clicked = true;
         document.getElementById("findModeBtn").classList.add("active");
@@ -82,31 +69,24 @@ function set_mode(mode, force) {
         document.getElementById("title").focus();
     }
 }
-
 function save_data(successCallback) {
     var title = document.getElementById("title").value.trim();
     var userId = document.getElementById("userId").value.trim();
     var message = document.getElementById("message").value.trim();
     var isRead = document.getElementById("isRead").value;
-
     clear_msgs();
     var has_error = false;
-
     if (title == "") { document.getElementById("titleMsg").innerHTML = "Required"; has_error = true; }
     if (userId == "") { document.getElementById("userIdMsg").innerHTML = "Required"; has_error = true; }
     if (message == "") { document.getElementById("messageMsg").innerHTML = "Required"; has_error = true; }
     if (isRead === "") { document.getElementById("isReadMsg").innerHTML = "Required"; has_error = true; }
-
     if (has_error) return false;
-
     if (find_clicked && record_id == "") {
         document.getElementById("msg").className = "msg-error";
         document.getElementById("msg").innerHTML = "Search record first";
         return false;
     }
-
     var data = { id: record_id, user_id: userId, title: title, message: message, is_read: isRead };
-
     fetch("/saveNotification", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -121,7 +101,6 @@ function save_data(successCallback) {
             }
             document.getElementById("msg").className = "msg-success";
             document.getElementById("msg").innerHTML = find_clicked ? "Updated successfully" : "Saved successfully";
-
             if (find_clicked && position !== -1) {
                 notifications_data[position][1] = userId;
                 notifications_data[position][2] = title;
@@ -129,7 +108,6 @@ function save_data(successCallback) {
                 notifications_data[position][4] = isRead;
             }
             get_notifications_data();
-
             if (!find_clicked) {
                 clear_fields();
                 document.getElementById("isRead").value = "Unread";
@@ -149,7 +127,6 @@ function save_data(successCallback) {
             document.getElementById("msg").innerHTML = "Failed to save record";
         });
 }
-
 function search_record() {
     var searchId = document.getElementById("notificationId").value.trim();
     if (searchId == "") {
@@ -186,7 +163,6 @@ function search_record() {
         document.getElementById("msg").innerHTML = "Record Not found";
     }
 }
-
 function next_data() {
     navigateWithCheck(function () {
         if (notifications_data.length == 0) {
@@ -206,7 +182,6 @@ function next_data() {
         document.getElementById("msg").className = "";
     });
 }
-
 function previous_data() {
     navigateWithCheck(function () {
         if (notifications_data.length == 0) {
@@ -226,7 +201,6 @@ function previous_data() {
         document.getElementById("msg").className = "";
     });
 }
-
 function show_data() {
     if (position < 0 || position >= notifications_data.length) return;
     record_id = notifications_data[position][0];
@@ -245,7 +219,6 @@ function show_data() {
     if (document.getElementById("isRead_display")) {
         document.getElementById("isRead_display").value = readVal || "";
     }
-
     find_clicked = true;
     document.getElementById("findModeBtn").classList.add("active");
     document.getElementById("newModeBtn").classList.remove("active");
@@ -256,7 +229,6 @@ function show_data() {
     document.getElementById("notificationId").style.backgroundColor = "white";
     clear_msgs();
 }
-
 function set_next_id() {
     var max_id = 0;
     for (var i = 0; i < notifications_data.length; i++) {
@@ -265,7 +237,6 @@ function set_next_id() {
     }
     document.getElementById("notificationId").value = max_id + 1;
 }
-
 function get_notifications_data() {
     fetch("/getNotifications")
         .then(function (response) { return response.json(); })
@@ -284,7 +255,6 @@ function get_notifications_data() {
             document.getElementById("msg").innerHTML = "Unable to load records";
         });
 }
-
 function get_lov_data() {
     fetch("/getLOV")
         .then(function (response) { return response.json(); })
@@ -308,7 +278,6 @@ function get_lov_data() {
                 if(document.getElementById("isRead_display")) document.getElementById("isRead_display").value = "Unread";
             }
         });
-
     fetch("/getUsers")
         .then(function (response) { return response.json(); })
         .then(function (data) {
@@ -329,18 +298,14 @@ function get_lov_data() {
         })
         .catch(function(err) { console.error("Error loading users", err); });
 }
-
 function exit_page() {
     navigateWithCheck(function () { window.history.back(); });
 }
-
 function checkDirtyState() {
     var title = document.getElementById("title").value.trim();
     var userId = document.getElementById("userId").value.trim();
     var message = document.getElementById("message").value.trim();
     var isRead = document.getElementById("isRead").value;
-
-
     if (find_clicked == false && position == -1) {
         if (title !== "" || userId !== "" || message !== "" || (isRead !== "" && isRead !== "Unread")) {
             return "edit";

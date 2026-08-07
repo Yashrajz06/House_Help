@@ -1,9 +1,6 @@
-// common.js
-
 function initMessageObserver() {
     const msgElement = document.getElementById("msg");
     if (!msgElement) return;
-    
     let msgTimeout;
     const observer = new MutationObserver(() => {
         if (msgElement.innerHTML !== "") {
@@ -14,18 +11,14 @@ function initMessageObserver() {
             }, 3000);
         }
     });
-    
     observer.observe(msgElement, { childList: true, subtree: true, characterData: true });
 }
-
 function validate_uniqueness(fieldId, colIndex, msgId, errorMsg) {
     var val = document.getElementById(fieldId).value.trim();
     if (val === "") return;
-    
     if (typeof users_data !== 'undefined') {
         for (var i = 0; i < users_data.length; i++) {
             if (find_clicked && users_data[i][0] == record_id) continue;
-            
             if (users_data[i][colIndex] == val) {
                 document.getElementById(msgId).innerHTML = errorMsg;
                 return false;
@@ -34,7 +27,6 @@ function validate_uniqueness(fieldId, colIndex, msgId, errorMsg) {
     }
     return true;
 }
-
 function toggleDropdown(fieldId) {
     var container = document.getElementById("tableContainer_" + fieldId);
     if (!container) return;
@@ -46,7 +38,6 @@ function toggleDropdown(fieldId) {
         container.style.display = "block";
     }
 }
-
 function selectOption(fieldId, value, displayText) {
     var hidden = document.getElementById(fieldId);
     var display = document.getElementById(fieldId + "_display");
@@ -55,31 +46,26 @@ function selectOption(fieldId, value, displayText) {
     var container = document.getElementById("tableContainer_" + fieldId);
     if (container) container.style.display = "none";
 }
-
 window.addEventListener('click', function(e) {
     if (!e.target.closest('.custom-dropdown')) {
         var dropdowns = document.querySelectorAll('.dropdown-table-container');
         dropdowns.forEach(d => d.style.display = 'none');
     }
 });
-
 function togglePassword() {
     var pwd = document.getElementById("passwordHash");
     if (pwd) {
         pwd.type = pwd.type === "password" ? "text" : "password";
     }
 }
-
 function resetPasswordIcon() {
     var pwd = document.getElementById("passwordHash");
     if (pwd) {
         pwd.type = "password";
     }
 }
-
 function checkDirtyState() {
     if (typeof position === 'undefined' || position === -1) return false;
-    
     var currentData = {
         userType: document.getElementById("userType").value,
         fullName: document.getElementById("fullName").value,
@@ -88,7 +74,6 @@ function checkDirtyState() {
         passwordHash: document.getElementById("passwordHash").value,
         isActive: document.getElementById("isActive").value
     };
-    
     var originalData = {
         userType: (users_data[position][1] || "").trim(),
         fullName: (users_data[position][2] || "").trim(),
@@ -97,21 +82,26 @@ function checkDirtyState() {
         passwordHash: (decodePassword(users_data[position][5]) || "").trim(),
         isActive: (mapActiveValue(users_data[position][6]) || "").trim()
     };
-    
     return JSON.stringify(currentData) !== JSON.stringify(originalData);
 }
-
 let pendingNavigationCallback = null;
-
 function navigateWithCheck(callback) {
     if (typeof find_clicked !== 'undefined' && find_clicked && checkDirtyState()) {
         pendingNavigationCallback = callback;
         showConfirm("Would you like to save the changes?", 
             function() { 
                 if (typeof save_data === 'function') {
-                    save_data(); 
+                    if (save_data.length > 0) {
+                        save_data(function() {
+                            if (pendingNavigationCallback) pendingNavigationCallback();
+                        });
+                    } else {
+                        save_data();
+                        if (pendingNavigationCallback) pendingNavigationCallback();
+                    }
+                } else {
+                    if (pendingNavigationCallback) pendingNavigationCallback();
                 }
-                if (pendingNavigationCallback) pendingNavigationCallback();
             },
             function() { 
                 if (pendingNavigationCallback) pendingNavigationCallback();
@@ -121,13 +111,10 @@ function navigateWithCheck(callback) {
         callback();
     }
 }
-
 function showConfirm(msg, yesCallback, noCallback) {
     var msgEl = document.getElementById("confirmMessage");
     if (!msgEl) return;
-    
     msgEl.innerHTML = msg;
-    
     var buttonsHtml = `
         <button type="button" class="save-btn" onclick="handleConfirm('yes')" style="width: 100px;">Yes</button>
         <button type="button" class="prev-btn" onclick="handleConfirm('no')" style="width: 100px;">No</button>
@@ -135,11 +122,9 @@ function showConfirm(msg, yesCallback, noCallback) {
     `;
     document.getElementById("confirmButtons").innerHTML = buttonsHtml;
     document.getElementById("confirmOverlay").style.display = "flex";
-    
     window._confirmYes = yesCallback;
     window._confirmNo = noCallback;
 }
-
 function handleConfirm(choice) {
     var overlay = document.getElementById("confirmOverlay");
     if (overlay) overlay.style.display = "none";
