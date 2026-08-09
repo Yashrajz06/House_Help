@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Entry</title>
+    <link rel="stylesheet" href="complaints.css">
+    
+</head>
+<body>
+
+<div id="outerbox">
+    <div class="container">
+
+        <div id="mainHeading" class="main-title">
+            House Help Management System
+        </div>
+
+        <div id="subHeading" class="sub-title">
+            Complaints Transaction Entry
+        </div>
+
+        <div id="messageBox" class="message-box"></div>
+
+        <div id="formbox" class="form-box grid-form-box">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="complaint_id">Complaint ID <span class="star">*</span></label>
+                    <div class="id-section">
+                        <input type="number" id="complaint_id" max="9999999999" oninput="if(this.value.length > 10) this.value = this.value.slice(0,10);">
+                        <button id="findBtn" style="display: none;">Find</button>
+                        <div class="connected-group">
+                            <button type="button" id="uiFindBtn" class="mode-btn">Find</button>
+                            <button type="button" id="uiNewBtn" class="mode-btn">New</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking_id">Booking ID <span class="star">*</span></label>
+                    <div class="dropdown-wrapper" id="bookingWrapper">
+                        <div class="input-with-arrow">
+                            <input type="text" id="booking_id" readonly placeholder="">
+                            <span class="dropdown-arrow" id="bookingArrow">&#9662;</span>
+                        </div>
+                        <div id="bookingDropdown" class="table-dropdown" style="display: none;">
+                            <table class="dropdown-table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Service Category</th>
+                                        <th>Service Date</th>
+                                        <th>Booking Status</th>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookingDropdownBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer_id">Customer ID <span class="star">*</span></label>
+                    <div class="dropdown-wrapper" id="customerWrapper">
+                        <div class="input-with-arrow">
+                            <input type="text" id="customer_id" readonly placeholder="">
+                            <span class="dropdown-arrow" id="customerArrow">&#9662;</span>
+                        </div>
+                        <div id="customerDropdown" class="table-dropdown" style="display: none;">
+                            <table class="dropdown-table">
+                                <thead>
+                                    <tr>
+                                        <th>Customer ID</th>
+                                        <th>Customer Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customerDropdownBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description <span class="star">*</span></label>
+                    <textarea id="description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status <span class="star">*</span></label>
+                    <div class="dropdown-wrapper" id="statusWrapper">
+                        <div class="input-with-arrow">
+                            <input type="text" id="status" readonly placeholder="">
+                            <span class="dropdown-arrow" id="statusArrow">&#9662;</span>
+                        </div>
+                        <div id="statusDropdown" class="table-dropdown" style="display: none;">
+                            <table class="dropdown-table">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="statusDropdownBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    
+                </div>
+            </div>
+
+            <div id="buttonBox" class="button-group" style="margin-top: 25px;">
+                <button id="saveBtn">Save</button>
+                <button id="updateBtn" style="display: none;">Update</button>
+                <button id="prevBtn">Previous</button>
+                <button id="nextBtn" style="display: none;">Next</button>
+                <button id="exitBtn">Exit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="confirmBox" class="confirm-box">
+    <p>Do you really want to exit the application?</p>
+    <div class="confirm-buttons">
+        <button id="yesExit">Yes</button>
+        <button id="noExit">No</button>
+    </div>
+</div>
+
+<script src="complaints.js"></script>
+<script>
+    (function() {
+        const originalFindBtn = document.getElementById("findBtn");
+        const uiFindBtn = document.getElementById("uiFindBtn");
+        const uiNewBtn = document.getElementById("uiNewBtn");
+        const saveBtn = document.getElementById("saveBtn");
+
+        if (!originalFindBtn || !uiFindBtn || !uiNewBtn) return;
+
+        function updateActiveStates() {
+            const isNewMode = (saveBtn && saveBtn.style.display !== "none");
+            if (isNewMode) {
+                uiNewBtn.classList.add("active");
+                uiFindBtn.classList.remove("active");
+            } else {
+                uiFindBtn.classList.add("active");
+                uiNewBtn.classList.remove("active");
+            }
+        }
+
+        uiFindBtn.addEventListener("click", () => {
+            originalFindBtn.innerText = "Find";
+            originalFindBtn.click();
+            updateActiveStates();
+        });
+
+        uiNewBtn.addEventListener("click", () => {
+            originalFindBtn.innerText = "New";
+            originalFindBtn.click();
+            updateActiveStates();
+        });
+
+        if (saveBtn) {
+            const observer = new MutationObserver(() => {
+                updateActiveStates();
+            });
+            observer.observe(saveBtn, { attributes: true, attributeFilter: ["style"] });
+        }
+
+        // Run initially to ensure correct highlight on load
+        updateActiveStates();
+    })();
+</script>
+
+</body>
+</html>
