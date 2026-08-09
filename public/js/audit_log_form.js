@@ -23,7 +23,7 @@ window.onload = function () {
 function clear_fields() {
     document.getElementById("auditId").value = "";
     document.getElementById("userId").value = "";
-    if(document.getElementById("userId_display")) document.getElementById("userId_display").value = "";
+    if (document.getElementById("userId_display")) document.getElementById("userId_display").value = "";
     document.getElementById("action").value = "";
     document.getElementById("actionDate").value = "";
 }
@@ -150,7 +150,7 @@ function search_record() {
         document.getElementById("msg").className = "";
     } else {
         document.getElementById("userId").value = "";
-    if(document.getElementById("userId_display")) document.getElementById("userId_display").value = "";
+        if (document.getElementById("userId_display")) document.getElementById("userId_display").value = "";
         document.getElementById("action").value = "";
         document.getElementById("actionDate").value = "";
         record_id = searchId;
@@ -272,16 +272,16 @@ function get_lov_data() {
                 user_map[id] = display;
                 var tr = document.createElement("tr");
                 tr.innerHTML = "<td>" + id + "</td><td>" + name + "</td>";
-                tr.onclick = (function(v, d) {
-                    return function() { selectOption("userId", v, d); };
+                tr.onclick = (function (v, d) {
+                    return function () { selectOption("userId", v, d); };
                 })(id, display);
                 if (userTbody) userTbody.appendChild(tr);
             }
         })
-        .catch(function(err) { console.error("Error loading users", err); });
+        .catch(function (err) { console.error("Error loading users", err); });
 }
 function exit_page() {
-    navigateWithCheck(function () { window.location.href = "http://localhost:3000/"; });
+    navigateWithCheck(function () { window.location.href = "http://localhost:5173/"; });
 }
 function checkDirtyState() {
     var userId = document.getElementById("userId").value.trim();

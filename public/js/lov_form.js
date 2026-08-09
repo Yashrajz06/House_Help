@@ -289,6 +289,6 @@ function previous_data() {
 }
 function exit_page() {
     navigateWithCheck(function () {
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "http://localhost:5173/";
     });
 }

@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Notifications Master</title>
     <link rel="stylesheet" href="css/common.css">
     <style>
-        .form-row, .form-row-full {
+        .form-row,
+        .form-row-full {
             grid-template-columns: 220px 1fr;
+        }
+
+        .form-row #titleLabel {
+            padding-left: 80px;
+        }
+
+        .form-row #statusLabel {
+            padding-left: 80px;
         }
     </style>
 </head>
+
 <body>
     <div class="page-border">
         <div class="title-main">House Help Management System</div>
-        <div class="title-sub">Notifications Transcation Entry</div>
+        <div class="title-sub">Notifications Transaction Entry</div>
         <p id="msg"></p>
         <div class="form-container">
             <div class="form-row">
                 <label>Notification ID <span>*</span></label>
                 <div class="id-section">
-                    <input type="text" id="notificationId" readonly maxlength="10"
+                    <input type="text" id="notificationId" readonly maxlength=" 10"
                         style="width: 150px; background-color:#eee; cursor:not-allowed;">
                     <div class="mode-toggle">
                         <button type="button" id="findModeBtn" class="toggle-btn"
@@ -29,7 +40,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Title <span>*</span></label>
+                <label id="titleLabel">Title <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <input type="text" id="title" maxlength="100">
                     <div id="titleMsg" class="smallMsg"></div>
@@ -39,49 +50,52 @@
                 <label>User ID <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <div class="custom-dropdown" id="dropdownContainer_userId">
-                    <input type="text" id="userId_display" readonly placeholder="" onclick="toggleDropdown('userId')">
-                    <input type="hidden" id="userId">
-                    <div id="tableContainer_userId" class="dropdown-table-container">
-                        <table class="dropdown-table" id="table_userId">
-                            <thead>
-                                <tr>
-                                <th>User ID</th>
-                                <th>User Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        <input type="text" id="userId_display" readonly placeholder=""
+                            onclick="toggleDropdown('userId')">
+                        <input type="hidden" id="userId">
+                        <div id="tableContainer_userId" class="dropdown-table-container">
+                            <table class="dropdown-table" id="table_userId">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>User Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
                     <div id="userIdMsg" class="smallMsg"></div>
                 </div>
             </div>
             <div class="form-row">
-                <label>Status <span>*</span></label>
+                <label id="statusLabel">Status <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <div class="custom-dropdown" id="dropdownContainer_isRead">
-                    <input type="text" id="isRead_display" readonly placeholder="" onclick="toggleDropdown('isRead')">
-                    <input type="hidden" id="isRead">
-                    <div id="tableContainer_isRead" class="dropdown-table-container">
-                        <table class="dropdown-table" id="table_isRead">
-                            <thead>
-                                <tr>
-                                <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        <input type="text" id="isRead_display" readonly placeholder=""
+                            onclick="toggleDropdown('isRead')">
+                        <input type="hidden" id="isRead">
+                        <div id="tableContainer_isRead" class="dropdown-table-container">
+                            <table class="dropdown-table" id="table_isRead">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
                     <div id="isReadMsg" class="smallMsg"></div>
                 </div>
             </div>
             <div class="form-row-full">
                 <label style="padding-top: 10px;">Message <span>*</span></label>
-                <div style="position: relative;">
-                    <textarea id="message" maxlength="500" rows="2"></textarea>
+                <div style="position: relative; width: 50%;">
+                    <textarea id="message" maxlength="100" rows="4"
+                        style="width: 90%; height: 100px; overflow: hidden; resize: none;"></textarea>
                     <div id="messageMsg" class="smallMsg"></div>
                 </div>
             </div>
@@ -105,4 +119,5 @@
     <script src="js/common.js"></script>
     <script src="js/notifications_form.js"></script>
 </body>
+
 </html>

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Audit Log Master</title>
     <link rel="stylesheet" href="css/common.css">
     <style>
-        .form-row, .form-row-full {
+        .form-row,
+        .form-row-full {
             grid-template-columns: 220px 1fr;
         }
+
+        .form-row {}
     </style>
 </head>
+
 <body>
     <div class="page-border">
         <div class="title-main">House Help Management System</div>
@@ -29,24 +34,25 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>User ID</label>
+                <label style="padding-left: 50px;">User ID <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <div class="custom-dropdown" id="dropdownContainer_userId">
-                    <input type="text" id="userId_display" readonly placeholder="" onclick="toggleDropdown('userId')">
-                    <input type="hidden" id="userId">
-                    <div id="tableContainer_userId" class="dropdown-table-container">
-                        <table class="dropdown-table" id="table_userId">
-                            <thead>
-                                <tr>
-                                <th>User ID</th>
-                                <th>User Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        <input type="text" id="userId_display" readonly placeholder=""
+                            onclick="toggleDropdown('userId')">
+                        <input type="hidden" id="userId">
+                        <div id="tableContainer_userId" class="dropdown-table-container">
+                            <table class="dropdown-table" id="table_userId">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>User Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
                     <div id="userIdMsg" class="smallMsg"></div>
                 </div>
             </div>
@@ -58,7 +64,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Action Date <span>*</span></label>
+                <label style="padding-left: 49px;">Action Date <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <input type="date" id="actionDate" style="width: 200px;">
                     <div id="actionDateMsg" class="smallMsg"></div>
@@ -84,4 +90,5 @@
     <script src="js/common.js"></script>
     <script src="js/audit_log_form.js"></script>
 </body>
+
 </html>

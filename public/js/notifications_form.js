@@ -86,7 +86,8 @@ function save_data(successCallback) {
         document.getElementById("msg").innerHTML = "Search record first";
         return false;
     }
-    var data = { id: record_id, user_id: userId, title: title, message: message, is_read: isRead };
+    var isReadNumeric = (isRead === "Read") ? 1 : 0;
+    var data = { id: record_id, user_id: userId, title: title, message: message, is_read: isReadNumeric };
     fetch("/saveNotification", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -286,7 +287,7 @@ function get_lov_data() {
             for (var i = 0; i < data.length; i++) {
                 var id = data[i][0];
                 var name = data[i][2] || "";
-                var display = id + " - " + name;
+                var display = name; // Only show the name when selected
                 user_map[id] = display;
                 var tr = document.createElement("tr");
                 tr.innerHTML = "<td>" + id + "</td><td>" + name + "</td>";
@@ -299,7 +300,7 @@ function get_lov_data() {
         .catch(function(err) { console.error("Error loading users", err); });
 }
 function exit_page() {
-    navigateWithCheck(function () { window.location.href = "http://localhost:3000/"; });
+    navigateWithCheck(function () { window.location.href = "http://localhost:5173/"; });
 }
 function checkDirtyState() {
     var title = document.getElementById("title").value.trim();

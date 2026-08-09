@@ -313,7 +313,7 @@ function get_dropdowns_data() {
             for (var i = 0; i < data.customers.length; i++) {
                 var id = data.customers[i][0];
                 var name = data.customers[i][1] || "";
-                var display = id + " - " + name;
+                var display = name; // Only show the name when selected
                 customer_map[id] = display;
                 var tr = document.createElement("tr");
                 tr.innerHTML = "<td>" + id + "</td><td>" + name + "</td>";
@@ -351,7 +351,7 @@ function get_dropdowns_data() {
         .catch(function(err) { console.error("Error loading dropdown data", err); });
 }
 function exit_page() {
-    navigateWithCheck(function () { window.location.href = "http://localhost:3000/"; });
+    navigateWithCheck(function () { window.location.href = "http://localhost:5173/"; });
 }
 function checkDirtyState() {
     var categoryId = document.getElementById("categoryId").value.trim();

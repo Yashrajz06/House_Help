@@ -7,6 +7,34 @@
         .form-row, .form-row-full {
             grid-template-columns: 220px 1fr;
         }
+
+        .form-row #categoryLabel,
+        .form-row #providerLabel,
+        .form-row #statusLabel {
+            padding-left: 80px;
+        }
+
+        /* Increase inner purple card size */
+        .form-container {
+            width: 85%;
+            padding: 60px 50px;
+        }
+
+        /* Increase label size */
+        .form-container label {
+            font-size: 24px;
+        }
+
+        /* Increase input size */
+        .form-container input,
+        .form-container select {
+            font-size: 22px;
+            height: 55px;
+        }
+        
+        .form-container textarea {
+            font-size: 22px;
+        }
     </style>
 </head>
 <body>
@@ -29,7 +57,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Category <span>*</span></label>
+                <label id="categoryLabel">Category <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <div class="custom-dropdown" id="dropdownContainer_categoryId">
                     <input type="text" id="categoryId_display" readonly placeholder="" onclick="toggleDropdown('categoryId')">
@@ -73,7 +101,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Provider <span>*</span></label>
+                <label id="providerLabel">Provider <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <div class="custom-dropdown" id="dropdownContainer_providerId">
                     <input type="text" id="providerId_display" readonly placeholder="" onclick="toggleDropdown('providerId')">
@@ -102,8 +130,8 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Status <span>*</span></label>
-                <div style="position: relative; width: 100%;">
+                <label id="statusLabel">Status <span>*</span></label>
+                <div style="position: relative; width: 200px;">
                     <div class="custom-dropdown" id="dropdownContainer_bookingStatus">
                     <input type="text" id="bookingStatus_display" readonly placeholder="" onclick="toggleDropdown('bookingStatus')">
                     <input type="hidden" id="bookingStatus">
@@ -124,8 +152,8 @@
             </div>
             <div class="form-row-full">
                 <label style="padding-top: 10px;">Address <span>*</span></label>
-                <div style="position: relative;">
-                    <textarea id="address" maxlength="500" rows="3"></textarea>
+                <div style="position: relative; width: 50%;">
+                    <textarea id="address" maxlength="500" rows="4" style="width: 90%; height: 120px; overflow: hidden; resize: none;"></textarea>
                     <div id="addressMsg" class="smallMsg"></div>
                 </div>
             </div>
@@ -146,7 +174,7 @@
             </div>
         </div>
     </div>
-    <script src="js/common.js"></script>
-    <script src="js/booking_form.js"></script>
+    <script src="js/common.js?v=2"></script>
+    <script src="js/booking_form.js?v=2"></script>
 </body>
 </html>
