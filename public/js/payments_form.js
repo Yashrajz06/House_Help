@@ -1,4 +1,5 @@
 var booking_map = {};
+var booking_details_map = {};
 var payments_data = [];
 var position = -1;
 var record_id = "";
@@ -28,6 +29,8 @@ function clear_fields() {
     document.getElementById("paymentId").value = "";
     document.getElementById("bookingId").value = "";
     if (document.getElementById("bookingId_display")) document.getElementById("bookingId_display").value = "";
+    document.getElementById("customerName").value = "";
+    document.getElementById("providerName").value = "";
     document.getElementById("amount").value = "";
     document.getElementById("paymentMode").value = "";
     if (document.getElementById("paymentMode_display")) document.getElementById("paymentMode_display").value = "";
@@ -226,8 +229,10 @@ function show_data() {
     var bid = p[1] || "";
     document.getElementById("bookingId").value = bid;
     if (document.getElementById("bookingId_display")) {
-        document.getElementById("bookingId_display").value = booking_map[bid] || (bid ? "Booking " + bid : "");
+        document.getElementById("bookingId_display").value = bid;
     }
+    document.getElementById("customerName").value = booking_details_map[bid] ? booking_details_map[bid].customer : "";
+    document.getElementById("providerName").value = booking_details_map[bid] ? booking_details_map[bid].provider : "";
     document.getElementById("amount").value = p[2] != null ? p[2] : "";
     document.getElementById("paymentMode").value = p[3] || "";
     if (document.getElementById("paymentMode_display")) document.getElementById("paymentMode_display").value = p[3] || "";
@@ -278,17 +283,25 @@ function get_bookings_data() {
             if (!tbody) return;
             tbody.innerHTML = "";
             booking_map = {};
+            booking_details_map = {};
             for (var i = 0; i < data.length; i++) {
                 var bid = data[i][0];
                 var cid = data[i][1] || "";
                 var pid = data[i][2] || "";
-                var display = "Booking " + bid + " (Cust: " + cid + ")";
+                var c_name = data[i][7] || "";
+                var p_name = data[i][8] || "";
+                var display = bid; // Only show Booking ID when selected
                 booking_map[bid] = display;
+                booking_details_map[bid] = { customer: c_name, provider: p_name };
                 var tr = document.createElement("tr");
-                tr.innerHTML = "<td>" + bid + "</td><td>" + cid + "</td><td>" + pid + "</td>";
-                tr.onclick = (function (v, d) {
-                    return function () { selectOption("bookingId", v, d); };
-                })(bid, display);
+                tr.innerHTML = "<td>" + bid + "</td><td>" + cid + "</td><td>" + c_name + "</td><td>" + pid + "</td><td>" + p_name + "</td>";
+                tr.onclick = (function (v, d, c, p) {
+                    return function () { 
+                        selectOption("bookingId", v, d);
+                        document.getElementById("customerName").value = c;
+                        document.getElementById("providerName").value = p;
+                    };
+                })(bid, display, c_name, p_name);
                 tbody.appendChild(tr);
             }
         })

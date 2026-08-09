@@ -7,6 +7,25 @@
         .form-row, .form-row-full {
             grid-template-columns: 220px 1fr;
         }
+
+        .form-row #bookingIdLabel,
+        .form-row #providerNameLabel,
+        .form-row #paymentModeLabel,
+        .form-row #paymentDateLabel {
+            padding-left: 80px;
+        }
+
+        #tableContainer_bookingId {
+            left: auto;
+            right: 0;
+            width: max-content;
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
+        #tableContainer_bookingId::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
     </style>
 </head>
 <body>
@@ -29,10 +48,10 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Booking ID</label>
+                <label id="bookingIdLabel">Booking ID</label>
                 <div style="position: relative; width: 100%;">
                     <div class="custom-dropdown" id="dropdownContainer_bookingId">
-                        <input type="text" id="bookingId_display" readonly placeholder="" onclick="toggleDropdown('bookingId')">
+                        <input type="text" id="bookingId_display" readonly placeholder="" onclick="toggleDropdown('bookingId')" style="width: 150px;">
                         <input type="hidden" id="bookingId">
                         <div id="tableContainer_bookingId" class="dropdown-table-container">
                             <table class="dropdown-table" id="table_bookingId">
@@ -40,7 +59,9 @@
                                     <tr>
                                         <th>Booking ID</th>
                                         <th>Customer ID</th>
+                                        <th>Customer Name</th>
                                         <th>Provider ID</th>
+                                        <th>Provider Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,6 +73,20 @@
                 </div>
             </div>
             <div class="form-row">
+                <label>Customer Name</label>
+                <div style="position: relative; width: 100%;">
+                    <input type="text" id="customerName" readonly 
+                        style="background-color:#eee; cursor:not-allowed;">
+                </div>
+            </div>
+            <div class="form-row">
+                <label id="providerNameLabel">Provider Name</label>
+                <div style="position: relative; width: 100%;">
+                    <input type="text" id="providerName" readonly 
+                        style="background-color:#eee; cursor:not-allowed;">
+                </div>
+            </div>
+            <div class="form-row">
                 <label>Amount <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <input type="number" id="amount" min="0" step="0.01" maxlength="15">
@@ -59,7 +94,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Payment Mode <span>*</span></label>
+                <label id="paymentModeLabel">Payment Mode <span>*</span></label>
                 <div style="position: relative; width: 100%;">
                     <div class="custom-dropdown" id="dropdownContainer_paymentMode">
                         <input type="text" id="paymentMode_display" readonly placeholder="" onclick="toggleDropdown('paymentMode')">
@@ -101,7 +136,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <label>Payment Date</label>
+                <label id="paymentDateLabel">Payment Date</label>
                 <div style="position: relative; width: 100%;">
                     <input type="date" id="paymentDate">
                     <div id="paymentDateMsg" class="smallMsg"></div>

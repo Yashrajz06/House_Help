@@ -242,9 +242,13 @@ def get_bookings():
         with get_db_connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
-                    """SELECT BOOKING_ID, CUSTOMER_ID, PROVIDER_ID, CATEGORY_ID,
-                              SERVICE_DATE, BOOKING_STATUS, ADDRESS
-                       FROM BOOKINGS ORDER BY BOOKING_ID"""
+                    """SELECT b.BOOKING_ID, b.CUSTOMER_ID, b.PROVIDER_ID, b.CATEGORY_ID,
+                              b.SERVICE_DATE, b.BOOKING_STATUS, b.ADDRESS,
+                              cu.FULL_NAME as CUSTOMER_NAME, pu.FULL_NAME as PROVIDER_NAME
+                       FROM BOOKINGS b
+                       LEFT JOIN USERS cu ON b.CUSTOMER_ID = cu.USER_ID
+                       LEFT JOIN USERS pu ON b.PROVIDER_ID = pu.USER_ID
+                       ORDER BY b.BOOKING_ID"""
                 )
                 rows = []
                 for row in cursor.fetchall():
